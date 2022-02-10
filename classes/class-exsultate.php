@@ -109,8 +109,8 @@ class Exsultate
         // Load plugin environment variables.
         $this->file       = $file;
         $this->dir        = dirname( $this->file );
-        //$this->assets_dir = trailingslashit( $this->dir ) . 'assets';
-        //$this->assets_url = esc_url( trailingslashit( plugins_url( '/assets/', $this->file ) ) );
+        $this->assets_dir = trailingslashit( $this->dir ) . 'assets';
+        $this->assets_url = plugin_dir_url(__FILE__) . '/assets/';
 
         $this->script_suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
@@ -134,28 +134,6 @@ class Exsultate
         $this->load_plugin_textdomain();
         add_action( 'init', array( $this, 'load_localisation' ), 0 );
     } // End __construct ()
-
-    /**
-     * Register post type function.
-     *
-     * @param string $post_type Post Type.
-     * @param string $plural Plural Label.
-     * @param string $single Single Label.
-     * @param string $description Description.
-     * @param array  $options Options array.
-     *
-     * @return bool|string|WordPress_Plugin_Template_Post_Type
-     */
-    public function register_post_type( $post_type = '', $plural = '', $single = '', $description = '', $options = array() ) {
-
-//        if ( ! $post_type || ! $plural || ! $single ) {
-//            return false;
-//        }
-//
-//        $post_type = new WordPress_Plugin_Template_Post_Type( $post_type, $plural, $single, $description, $options );
-//
-//        return $post_type;
-    }
 
     /**
      * Wrapper function to register a new taxonomy.
@@ -187,8 +165,7 @@ class Exsultate
      * @since   1.0.0
      */
     public function enqueue_styles() {
-//        wp_register_style( $this->_token . '-frontend', esc_url( $this->assets_url ) . 'css/frontend.css', array(), $this->_version );
-//        wp_enqueue_style( $this->_token . '-frontend' );
+        wp_enqueue_style( 'styles',  esc_url( $this->assets_url ) . 'css/styles.css');
     } // End enqueue_styles ()
 
     /**

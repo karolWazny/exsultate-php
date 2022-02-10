@@ -46,7 +46,7 @@ function exsultate() {
 }
 
 define( 'MY_LZB_PATH', __DIR__ . '/inc/lzb/' );
-define( 'MY_LZB_URL', __DIR__ . '/inc/lzb/' );
+define( 'MY_LZB_URL', plugin_dir_url(__FILE__) . 'inc/lzb/' );
 
 // Include the LZB plugin.
 require_once MY_LZB_PATH . 'lazy-blocks.php';

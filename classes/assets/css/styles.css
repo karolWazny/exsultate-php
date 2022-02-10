@@ -1,0 +1,28 @@
+div.cpress div.cpress_line {
+    margin: 0 0 0 0;
+}
+div.cpress_interaction button {
+    display: none;
+}
+
+div.exsultate_chorus {
+    font-style: italic;
+}
+
+#song_with_chords {
+    float: right;
+}
+
+.utwory_lista ul {
+    list-style-type: none;
+    margin-left: 10;
+    padding: 0;
+}
+
+.utwory_lista p {
+    display: none;
+}
+
+.utwory_lista h6 {
+    margin: 0.5em 0 0.3em;
+}

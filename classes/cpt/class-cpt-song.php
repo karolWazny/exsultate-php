@@ -6,7 +6,11 @@ class ExsultateCustomPostTypeSong
 
     private function __construct(){
         add_action( 'init', array($this, 'create_post_type' ));
+
+        //add_action('load-post.php', array($this, 'admin_init'));
+        //add_action('save_post', array($this, 'save_price'));
     }
+
 
     public function create_post_type(){
         $labels = array(
@@ -69,5 +73,25 @@ class ExsultateCustomPostTypeSong
         }
 
         return self::$_instance;
+    }
+
+    public function admin_init(){
+        add_meta_box("someId", "Product Options", "meta_options");
+    }
+
+
+    public function meta_options(){
+        global $post;
+        $custom = get_post_custom($post->ID);
+        $price = $custom["price"][0];
+        ?>
+        <label>Price:</label><input name="price" value="<?php echo $price; ?>" />
+        <?php
+    }
+
+
+    public function save_price(){
+        global $post;
+        update_post_meta($post->ID, "price", $_POST["price"]);
     }
 }
