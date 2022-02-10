@@ -1,5 +1,6 @@
 <?php
-require_once 'class-exsultate-rest.php';
+require_once 'rest/class-exsultate-rest.php';
+require_once 'cpt/class-cpt-song.php';
 class Exsultate
 {
     /**
@@ -91,6 +92,7 @@ class Exsultate
     public $script_suffix;
 
     private $rest;
+    private $cpt;
 
     /**
      * Constructor funtion.
@@ -100,6 +102,7 @@ class Exsultate
      */
     public function __construct( $file = '', $version = '1.0.0' ) {
         $this->rest = ExsultateRest::instance();
+        $this->cpt = ExsultateCustomPostTypeSong::instance();
         $this->_version = $version;
         $this->_token   = 'exsultate';
 
