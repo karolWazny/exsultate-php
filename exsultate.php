@@ -45,4 +45,16 @@ function exsultate() {
     return $instance;
 }
 
+define( 'MY_LZB_PATH', __DIR__ . '/inc/lzb/' );
+define( 'MY_LZB_URL', __DIR__ . '/inc/lzb/' );
+
+// Include the LZB plugin.
+require_once MY_LZB_PATH . 'lazy-blocks.php';
+
+// Customize the url setting to fix incorrect asset URLs.
+add_filter( 'lzb/plugin_url', 'my_lzb_url' );
+function my_lzb_url( $url ) {
+    return MY_LZB_URL;
+}
+
 exsultate();
