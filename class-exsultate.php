@@ -3,13 +3,6 @@ require_once 'classes/rest/class-exsultate-rest.php';
 require_once 'classes/cpt/class-cpt-song.php';
 class Exsultate
 {
-    /**
-     * The single instance of WordPress_Plugin_Template.
-     *
-     * @var     object
-     * @access  private
-     * @since   1.0.0
-     */
     private static $_instance = null; //phpcs:ignore
 
     /**
@@ -28,67 +21,18 @@ class Exsultate
      */
     public $settings = null;
 
-    /**
-     * The version number.
-     *
-     * @var     string
-     * @access  public
-     * @since   1.0.0
-     */
     public $_version; //phpcs:ignore
 
-    /**
-     * The token.
-     *
-     * @var     string
-     * @access  public
-     * @since   1.0.0
-     */
     public $_token; //phpcs:ignore
 
-    /**
-     * The main plugin file.
-     *
-     * @var     string
-     * @access  public
-     * @since   1.0.0
-     */
     public $file;
 
-    /**
-     * The main plugin directory.
-     *
-     * @var     string
-     * @access  public
-     * @since   1.0.0
-     */
     public $dir;
 
-    /**
-     * The plugin assets directory.
-     *
-     * @var     string
-     * @access  public
-     * @since   1.0.0
-     */
     public $assets_dir;
 
-    /**
-     * The plugin assets URL.
-     *
-     * @var     string
-     * @access  public
-     * @since   1.0.0
-     */
     public $assets_url;
 
-    /**
-     * Suffix for JavaScripts.
-     *
-     * @var     string
-     * @access  public
-     * @since   1.0.0
-     */
     public $script_suffix;
 
     private $rest;
@@ -177,8 +121,7 @@ class Exsultate
      * @since   1.0.0
      */
     public function enqueue_scripts() {
-//        wp_register_script( $this->_token . '-frontend', esc_url( $this->assets_url ) . 'js/frontend' . $this->script_suffix . '.js', array( 'jquery' ), $this->_version, true );
-//        wp_enqueue_script( $this->_token . '-frontend' );
+        wp_enqueue_script( 'copy', esc_url( $this->assets_url ) . 'js/copy.js' );
     } // End enqueue_scripts ()
 
     /**
