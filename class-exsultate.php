@@ -1,6 +1,6 @@
 <?php
-require_once 'rest/class-exsultate-rest.php';
-require_once 'cpt/class-cpt-song.php';
+require_once 'classes/rest/class-exsultate-rest.php';
+require_once 'classes/cpt/class-cpt-song.php';
 class Exsultate
 {
     /**
@@ -110,6 +110,7 @@ class Exsultate
         $this->file       = $file;
         $this->dir        = dirname( $this->file );
         $this->assets_dir = trailingslashit( $this->dir ) . 'assets';
+
         $this->assets_url = plugin_dir_url(__FILE__) . '/assets/';
 
         $this->script_suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';

@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Load plugin class files.
-require_once 'classes/class-exsultate.php';
+require_once 'class-exsultate.php';
 //require_once 'includes/class-wordpress-plugin-template-settings.php';
 
 // Load plugin libraries.

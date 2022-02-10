@@ -1,0 +1,308 @@
+[
+    {
+        "id": 58,
+        "title": "Ogranicznik dostępu",
+        "icon": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<rect opacity=\"0.25\" width=\"15\" height=\"15\" rx=\"4\" transform=\"matrix(-1 0 0 1 22 7)\" fill=\"currentColor\" \/>\n<rect width=\"15\" height=\"15\" rx=\"4\" transform=\"matrix(-1 0 0 1 17 2)\" fill=\"currentColor\" \/>\n<\/svg>\n",
+        "keywords": [],
+        "slug": "lazyblock\/access-restriction",
+        "description": "",
+        "category": "text",
+        "category_label": "text",
+        "supports": {
+            "customClassName": true,
+            "anchor": false,
+            "align": [
+                "wide",
+                "full"
+            ],
+            "html": false,
+            "multiple": true,
+            "inserter": true
+        },
+        "ghostkit": {
+            "supports": {
+                "spacings": false,
+                "display": false,
+                "scrollReveal": false,
+                "frame": false,
+                "customCSS": false
+            }
+        },
+        "controls": {
+            "control_5de97f401e": {
+                "type": "inner_blocks",
+                "name": "content",
+                "default": "",
+                "label": "Zawartość",
+                "help": "",
+                "child_of": "",
+                "placement": "content",
+                "width": "100",
+                "hide_if_not_selected": "false",
+                "save_in_meta": "false",
+                "save_in_meta_name": "",
+                "required": "false",
+                "placeholder": "",
+                "characters_limit": ""
+            }
+        },
+        "code": {
+            "output_method": "php",
+            "editor_html": "",
+            "editor_callback": "",
+            "editor_css": "",
+            "frontend_html": "<?php if (is_user_logged_in()) : ?>\n  <?php echo($attributes['content']) ?>\n<?php endif ?>",
+            "frontend_callback": "",
+            "frontend_css": "",
+            "show_preview": "always",
+            "single_output": false
+        },
+        "condition": []
+    },
+    {
+        "id": 56,
+        "title": "Refren",
+        "icon": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<rect opacity=\"0.25\" width=\"15\" height=\"15\" rx=\"4\" transform=\"matrix(-1 0 0 1 22 7)\" fill=\"currentColor\" \/>\n<rect width=\"15\" height=\"15\" rx=\"4\" transform=\"matrix(-1 0 0 1 17 2)\" fill=\"currentColor\" \/>\n<\/svg>\n",
+        "keywords": [],
+        "slug": "lazyblock\/chorus",
+        "description": "",
+        "category": "text",
+        "category_label": "text",
+        "supports": {
+            "customClassName": true,
+            "anchor": false,
+            "align": [
+                "wide",
+                "full"
+            ],
+            "html": false,
+            "multiple": true,
+            "inserter": true
+        },
+        "ghostkit": {
+            "supports": {
+                "spacings": false,
+                "display": false,
+                "scrollReveal": false,
+                "frame": false,
+                "customCSS": false
+            }
+        },
+        "controls": {
+            "control_fb8bfe4da4": {
+                "type": "textarea",
+                "name": "content",
+                "default": "",
+                "label": "Tekst referenu",
+                "help": "",
+                "child_of": "",
+                "placement": "content",
+                "width": "100",
+                "hide_if_not_selected": "false",
+                "save_in_meta": "false",
+                "save_in_meta_name": "",
+                "required": "false",
+                "placeholder": "",
+                "characters_limit": ""
+            }
+        },
+        "code": {
+            "output_method": "php",
+            "editor_html": "",
+            "editor_callback": "",
+            "editor_css": "",
+            "frontend_html": "<div class=\"exsultate_chorus\" style=\"padding-top:25px;padding-bottom:25px\">\n  [chordpress hbnotation=\"yes\" interactive=\"no\"]\n  <?php echo($attributes['content']) ?>\n  [\/chordpress]\n<\/div>",
+            "frontend_callback": "",
+            "frontend_css": "",
+            "show_preview": "always",
+            "single_output": false
+        },
+        "condition": []
+    },
+    {
+        "id": 54,
+        "title": "Zwrotka",
+        "icon": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<rect opacity=\"0.25\" width=\"15\" height=\"15\" rx=\"4\" transform=\"matrix(-1 0 0 1 22 7)\" fill=\"currentColor\" \/>\n<rect width=\"15\" height=\"15\" rx=\"4\" transform=\"matrix(-1 0 0 1 17 2)\" fill=\"currentColor\" \/>\n<\/svg>\n",
+        "keywords": [],
+        "slug": "lazyblock\/verse",
+        "description": "",
+        "category": "text",
+        "category_label": "text",
+        "supports": {
+            "customClassName": true,
+            "anchor": false,
+            "align": [
+                "wide",
+                "full"
+            ],
+            "html": false,
+            "multiple": true,
+            "inserter": true
+        },
+        "ghostkit": {
+            "supports": {
+                "spacings": false,
+                "display": false,
+                "scrollReveal": false,
+                "frame": false,
+                "customCSS": false
+            }
+        },
+        "controls": {
+            "control_a7ab0b4188": {
+                "type": "textarea",
+                "name": "content",
+                "default": "",
+                "label": "Tekst zwrotki",
+                "help": "",
+                "child_of": "",
+                "placement": "content",
+                "width": "100",
+                "hide_if_not_selected": "false",
+                "save_in_meta": "false",
+                "save_in_meta_name": "",
+                "required": "false",
+                "placeholder": "",
+                "characters_limit": ""
+            }
+        },
+        "code": {
+            "output_method": "php",
+            "editor_html": "",
+            "editor_callback": "",
+            "editor_css": "",
+            "frontend_html": "<div class=\"exsultate_verse\" style=\"padding-top:25px;padding-bottom:25px\">\n  [chordpress float=\"none\" format=\"yes\" hbnotation=\"yes\" interactive=\"no\"]\n  <?php echo $attributes['content'] ?>\n  [\/chordpress]\n<\/div>",
+            "frontend_callback": "",
+            "frontend_css": "",
+            "show_preview": "always",
+            "single_output": false
+        },
+        "condition": []
+    },
+    {
+        "id": 51,
+        "title": "Pieśń",
+        "icon": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<rect opacity=\"0.25\" width=\"15\" height=\"15\" rx=\"4\" transform=\"matrix(-1 0 0 1 22 7)\" fill=\"currentColor\" \/>\n<rect width=\"15\" height=\"15\" rx=\"4\" transform=\"matrix(-1 0 0 1 17 2)\" fill=\"currentColor\" \/>\n<\/svg>\n",
+        "keywords": [],
+        "slug": "lazyblock\/song",
+        "description": "",
+        "category": "text",
+        "category_label": "text",
+        "supports": {
+            "customClassName": true,
+            "anchor": false,
+            "align": [
+                "wide",
+                "full"
+            ],
+            "html": false,
+            "multiple": true,
+            "inserter": true
+        },
+        "ghostkit": {
+            "supports": {
+                "spacings": false,
+                "display": false,
+                "scrollReveal": false,
+                "frame": false,
+                "customCSS": false
+            }
+        },
+        "controls": {
+            "control_f71a304fd4": {
+                "type": "checkbox",
+                "name": "hide-key-change",
+                "default": "",
+                "label": "Ukryj transpozycję",
+                "help": "",
+                "child_of": "",
+                "placement": "content",
+                "width": "100",
+                "hide_if_not_selected": "false",
+                "save_in_meta": "false",
+                "save_in_meta_name": "",
+                "required": "false",
+                "checked": "false",
+                "alongside_text": "",
+                "placeholder": "",
+                "characters_limit": ""
+            },
+            "control_b8e9c34058": {
+                "type": "inner_blocks",
+                "name": "content",
+                "default": "",
+                "label": "Zawartość",
+                "help": "",
+                "child_of": "",
+                "placement": "content",
+                "width": "100",
+                "hide_if_not_selected": "false",
+                "save_in_meta": "false",
+                "save_in_meta_name": "",
+                "required": "false",
+                "placeholder": "",
+                "characters_limit": ""
+            },
+            "control_3608fa4668": {
+                "type": "text",
+                "name": "lyrics-author",
+                "default": "",
+                "label": "Tekst",
+                "help": "",
+                "child_of": "",
+                "placement": "content",
+                "width": "100",
+                "hide_if_not_selected": "false",
+                "save_in_meta": "false",
+                "save_in_meta_name": "",
+                "required": "false",
+                "placeholder": "",
+                "characters_limit": ""
+            },
+            "control_18bbab4f4e": {
+                "type": "text",
+                "name": "music-author",
+                "default": "",
+                "label": "Muzyka",
+                "help": "",
+                "child_of": "",
+                "placement": "content",
+                "width": "100",
+                "hide_if_not_selected": "false",
+                "save_in_meta": "false",
+                "save_in_meta_name": "",
+                "required": "false",
+                "placeholder": "",
+                "characters_limit": ""
+            },
+            "control_3eb810443a": {
+                "type": "text",
+                "name": "translation-author",
+                "default": "",
+                "label": "Tłumaczenie",
+                "help": "",
+                "child_of": "",
+                "placement": "content",
+                "width": "100",
+                "hide_if_not_selected": "false",
+                "save_in_meta": "false",
+                "save_in_meta_name": "",
+                "required": "false",
+                "placeholder": "",
+                "characters_limit": ""
+            }
+        },
+        "code": {
+            "output_method": "php",
+            "editor_html": "",
+            "editor_callback": "",
+            "editor_css": "",
+            "frontend_html": "<div id=\"song_with_chords\" class=\"exsultate_song\">\n  <script type=\"text\/javascript\">\n    function copyStringToClipboard (str) {\n    \/\/ Create new element\n    var el = document.createElement('textarea');\n    \/\/ Set value (string to be copied)\n    el.value = str;\n    \/\/ Set non-editable to avoid focus and move outside of view\n    el.setAttribute('readonly', '');\n    el.style = {position: 'absolute', left: '-9999px'};\n    document.body.appendChild(el);\n    \/\/ Select text inside element\n    el.select();\n    \/\/ Copy text to clipboard\n    document.execCommand('copy');\n    \/\/ Remove temporary element\n    document.body.removeChild(el);\n    }\n    \n    function get_song_parts(song) {\n      let entire_song = document.getElementById(\"piesn_z_akordami\");\n      let song_contents = entire_song.querySelectorAll(\"*\");\n      let song_parts = new Array();\n      Array.from(song_contents).forEach(div => {\n        if(div.className.normalize() === \"my_verse\" || div.className === \"my_chorus\") {\n          song_parts.push(div);\n        }\n        });\n      return song_parts;\n    }\n      \n    function get_lyrics() {\n      let song_parts = get_song_parts();\n      let lyrics = \"\";\n      song_parts.forEach(div => {\n        let song_section = \"\";\n        let cpress_lines = div.querySelectorAll(\".cpress_line\");\n        Array.from(cpress_lines).forEach(line => {\n          let line_text = \"\";\n          let line_sections = line.querySelectorAll(\".lyric\");\n          Array.from(line_sections).forEach(sec => {\n            line_text = line_text.concat(sec.innerText);\n          });\n          if(line_text === \"\") {\n            line_text = line.innerText;\n          }\n          line_text = line_text.trim().replace(\/\\s+\/g,' ');\n          song_section = song_section.concat(line_text).concat('\\n');\n        });\n        lyrics = lyrics.concat(song_section);\n      });\n      \n      copyStringToClipboard(lyrics.trim());\n    }\n    \n    function get_lyrics_and_chords(){\n      let song_parts = get_song_parts();\n      let lyrics = \"\";\n      song_parts.forEach(div => {\n        let song_section = \"\";\n        let cpress_lines = div.querySelectorAll(\".cpress_line\");\n        Array.from(cpress_lines).forEach(line => {\n          let line_text = \"\";\n          let line_chords = \"|\";\n          let line_sections = line.querySelectorAll(\".lyric\");\n          Array.from(line_sections).forEach(sec => {\n            line_text = line_text.concat(sec.innerText);\n          });\n          if(line_text === \"\") {\n            line_text = line.innerText;\n          }\n          \n          let chord_sections = line.querySelectorAll(\".chord\");\n          Array.from(chord_sections).forEach(sec => {\n            if(sec.style.display != \"none\") {\n              line_chords = line_chords.concat(\" \").concat(sec.innerText.trim());\n            }\n          });\n          \n          line_text = line_text.trim().concat(\" \").concat(line_chords).replace(\/\\s+\/g,' ');\n          if(line_text.trim() != \"|\") {\n            song_section = song_section.concat(line_text).concat('\\n');\n          }\n        });\n        lyrics = lyrics.concat(song_section).concat('\\n');\n      });\n      \n      copyStringToClipboard(lyrics.trim());\n    }\n  <\/script>\n  \n\n  \n  <?php if(!$attributes['hide-key-change']) : ?>\n    [chordpress interactive=\"yes\"][\/chordpress]\n  <?php endif ?>\n  <?php echo $attributes['content'] ?>\n  \n  <?php if(isset($attributes['translation-author'])) : ?>\n    <div><\/div>\n  <?php endif ?>\n  \n  <div class=\"exsultate_song_credits\" style=\"margin-bottom:20px;\">\n    <?php if($attributes['lyrics-author'] != \"\") : ?>\n      Tekst: <?php echo($attributes['lyrics-author'])?><br>\n    <?php endif ?>\n    <?php if($attributes['translation-author'] != \"\") : ?>\n      Tłumaczenie: <?php echo($attributes['translation-author'])?><br>\n    <?php endif ?>\n    <?php if($attributes['music-author'] != \"\") : ?>\n      Muzyka: <?php echo($attributes['music-author'])?>\n    <?php endif ?>\n  <\/div>\n  \n    <div class=\"wp-block-buttons\">\n      <?php if(!$attributes['hide-key-change']) : ?>\n        <button id=\"lyrics_with_chords_butt\" onclick=\"get_lyrics_and_chords()\">\n          Tekst i chwyty\n        <\/button>\n      <?php endif ?>\n      \n      <button id=\"lyrics_butt\" onclick=\"get_lyrics()\">\n        Tekst\n      <\/button>\n    <\/div>\n<\/div>",
+            "frontend_callback": "",
+            "frontend_css": "",
+            "show_preview": "always",
+            "single_output": false
+        },
+        "condition": []
+    }
+]
