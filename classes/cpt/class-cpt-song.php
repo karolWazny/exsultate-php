@@ -3,14 +3,45 @@
 class ExsultateCustomPostTypeSong
 {
     private static $_instance = null;
+    //this is just a string, but due to some strange stuff going on inside it,
+    //it is enclosed in an unusual way
+    private static $_default_content = <<<END
+<!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column {"width":"66.66%"} -->
+<div class="wp-block-column" style="flex-basis:66.66%"><!-- wp:lazyblock/song {"blockId":"18RaRQ","blockUniqueClass":"lazyblock-song-18RaRQ"} /--></div>
+<!-- /wp:column -->
+
+<!-- wp:column {"width":"33.33%"} -->
+<div class="wp-block-column" style="flex-basis:33.33%"><!-- wp:lazyblock/access-restriction {"blockId":"ZBljDs","blockUniqueClass":"lazyblock-access-restriction-ZBljDs"} /--></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
+END;
 
     private function __construct(){
         add_action( 'init', array($this, 'create_post_type' ));
+
+        //add_action ( 'save_post_songs', array($this, 'save_song_data' ), 10, 3 );
+        add_filter ( 'wp_insert_post_data', array($this, 'insert_song_data'), 10, 2 );
+        add_filter( 'default_content', array($this, 'default_content_callback'), 10, 2 );
 
         //add_action('load-post.php', array($this, 'admin_init'));
         //add_action('save_post', array($this, 'save_price'));
     }
 
+    public function default_content_callback( $content, $post ) {
+        if ( $post->post_type == 'songs' ) {
+            return self::$_default_content;
+        }
+        return $content;
+    }
+
+    public function insert_song_data($data, $postarr){
+        $myfile = fopen(plugin_dir_path( __FILE__ ) . "data.txt", "w");
+        fwrite($myfile, $data['post_content']);
+        fclose($myfile);
+
+        return $data;
+    }
 
     public function create_post_type(){
         $labels = array(
@@ -79,7 +110,6 @@ class ExsultateCustomPostTypeSong
         add_meta_box("someId", "Product Options", "meta_options");
     }
 
-
     public function meta_options(){
         global $post;
         $custom = get_post_custom($post->ID);
@@ -88,7 +118,6 @@ class ExsultateCustomPostTypeSong
         <label>Price:</label><input name="price" value="<?php echo $price; ?>" />
         <?php
     }
-
 
     public function save_price(){
         global $post;
