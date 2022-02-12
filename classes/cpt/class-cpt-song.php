@@ -20,12 +20,10 @@ END;
     private function __construct(){
         add_action( 'init', array($this, 'create_post_type' ));
 
-        //add_action ( 'save_post_songs', array($this, 'save_song_data' ), 10, 3 );
         add_filter ( 'wp_insert_post_data', array($this, 'insert_song_data'), 10, 2 );
         add_filter( 'default_content', array($this, 'default_content_callback'), 10, 2 );
 
-        //add_action('load-post.php', array($this, 'admin_init'));
-        //add_action('save_post', array($this, 'save_price'));
+        add_action( 'the_post', array($this, 'filter_song_data_for_edition'), 10 );
     }
 
     public function default_content_callback( $content, $post ) {
@@ -33,6 +31,14 @@ END;
             return self::$_default_content;
         }
         return $content;
+    }
+
+    public function filter_song_data_for_edition( $post ){
+        if( $post->post_type == 'songs' ) {
+            if(isset($_GET['action']) && $_GET['action'] == 'edit') {
+                $post->post_content = 'dupa';
+            }
+        }
     }
 
     public function insert_song_data($data, $postarr){
