@@ -111,22 +111,4 @@ END;
 
         return self::$_instance;
     }
-
-    public function admin_init(){
-        add_meta_box("someId", "Product Options", "meta_options");
-    }
-
-    public function meta_options(){
-        global $post;
-        $custom = get_post_custom($post->ID);
-        $price = $custom["price"][0];
-        ?>
-        <label>Price:</label><input name="price" value="<?php echo $price; ?>" />
-        <?php
-    }
-
-    public function save_price(){
-        global $post;
-        update_post_meta($post->ID, "price", $_POST["price"]);
-    }
 }
