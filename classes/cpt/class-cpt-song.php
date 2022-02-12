@@ -1,5 +1,7 @@
 <?php
 
+require_once 'class-song-display-formatter.php';
+
 class ExsultateCustomPostTypeSong
 {
     private static $_instance = null;
@@ -20,17 +22,18 @@ END;
     private function __construct(){
         add_action( 'init', array($this, 'create_post_type' ));
 
-        add_filter ( 'wp_insert_post_data', array($this, 'insert_song_data'), 10, 2 );
+        add_filter( 'wp_insert_post_data', array($this, 'insert_song_data'), 10, 2 );
         add_filter( 'default_content', array($this, 'default_content_callback'), 10, 2 );
 
         add_action( 'the_post', array($this, 'filter_song_data_for_edition'), 10 );
-        add_filter( 'the_content',  array($this, 'display_song_content_filter'), 5 );
+        add_filter( 'the_content', array($this, 'display_song_content_filter'), 5 );
     }
 
     public function display_song_content_filter( $content ){
         global $post;
         if ($post->post_type == 'songs') {
-            return $content . 'Test text here';
+            $formatter = new ExsultateSongDisplayFormatter();
+            return $formatter->format( $content, $post->post_id);
         }
         return $content;
     }
@@ -45,7 +48,8 @@ END;
     public function filter_song_data_for_edition( $post ){
         if( $post->post_type == 'songs' ) {
             if(isset($_GET['action']) && $_GET['action'] == 'edit') {
-                $post->post_content = 'dupa';
+                $formatter = new ExsultateSongDisplayFormatter();
+                $formatter->format( $post->post_content, $post->post_id);
             }
         }
     }
@@ -55,7 +59,8 @@ END;
         fwrite($myfile, $data['post_content']);
         fclose($myfile);
 
-        return $data;
+        $formatter = new ExsultateSongSaveFormatter();
+        return $formatter->format( $data );
     }
 
     public function create_post_type(){
