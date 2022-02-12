@@ -1,6 +1,7 @@
 <?php
 
 require_once 'class-song-display-formatter.php';
+require_once 'class-song-save-formatter.php';
 
 class ExsultateCustomPostTypeSong
 {
