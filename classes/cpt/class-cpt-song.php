@@ -24,6 +24,15 @@ END;
         add_filter( 'default_content', array($this, 'default_content_callback'), 10, 2 );
 
         add_action( 'the_post', array($this, 'filter_song_data_for_edition'), 10 );
+        add_filter( 'the_content',  array($this, 'display_song_content_filter'), 5 );
+    }
+
+    public function display_song_content_filter( $content ){
+        global $post;
+        if ($post->post_type == 'songs') {
+            return $content . 'Test text here';
+        }
+        return $content;
     }
 
     public function default_content_callback( $content, $post ) {
