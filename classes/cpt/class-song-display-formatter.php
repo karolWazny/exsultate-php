@@ -58,27 +58,12 @@ END;
             'attrs'=> [
 
             ],
-            'innerBlocks'=>$this->build_restricted_inner_blocks()
+            'innerBlocks'=>$this->restricted
         ];
 
         $output['innerContent'] = array_fill(0, count($output['innerBlocks']), null);
 
-
-
         $this->restricted_block = $output;
-    }
-
-    private function build_restricted_inner_blocks(){
-        $output = [];
-        foreach ($this->restricted as $restricted_block){
-            $output[] = parse_block($restricted_block);
-        }
-
-        $myfile = fopen(plugin_dir_path( __FILE__ ) . "restricted_content.txt", "w");
-        fwrite($myfile, json_encode($this->restricted));
-        fclose($myfile);
-
-        return $output;
     }
 
     private function extract_objects(){

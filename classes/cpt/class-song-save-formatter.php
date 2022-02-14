@@ -83,10 +83,7 @@ class ExsultateSongSaveFormatter
         if(is_null($this->restrictor_block)){
             return;
         }
-        $restricted_blocks = $this->restrictor_block['innerBlocks'];
-        foreach ($restricted_blocks as $restricted_block) {
-            $this->restricted_content = $this->restricted_content . serialize_block($restricted_block);
-        }
+        $this->restricted_content = $this->restrictor_block['innerBlocks'];
     }
 
     private function parse_blocks(){
