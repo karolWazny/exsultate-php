@@ -3,13 +3,20 @@
 class ExsultateSongSaveFormatter
 {
     private $post_content;
-    private $song_block;
-    private $restrictor_block;
     private $blocks;
 
+    private $song_block;
+
+    private $song = [];
+
+    private $restrictor_block;
+    private $restricted_content;
+
     public function format( &$data ) {
+        $this->song = [];
         try{
             $this->post_content = $data['post_content'];
+            $this->song['title'] = trim($data['post_title']);
 
             $this->unquote_content();
 
@@ -17,17 +24,41 @@ class ExsultateSongSaveFormatter
             $this->find_song_block();
             $this->find_access_restrictor_block();
 
+            $this->obtain_restricted_content();
+            $this->obtain_song_info();
+
             $this->quote_content();
 
             //it is super important we assign it here,
             //not at any place before;
             //so if any exception occurs, our data stays in its initial state
             //so it is kind of safe
-            $data['post_content'] = $this->post_content;
+            //$data['post_content'] = $this->post_content;
         } catch (Exception $e) {
         }
 
         return $data;
+    }
+
+    private function build_song_object(){
+        $this->song['lyrics'] = $this->song_block['lyrics-author'];
+        $this->song['music'] = $this->song_block['music-author'];
+        $this->song['translated'] = $this->song_block['translation-author'];
+        $song_content = [];
+        foreach ($this->song_block['innerBlocks'] as $inner_block){
+
+        }
+    }
+
+    private function obtain_restricted_content(){
+        $this->restricted_content = '';
+        if(is_null($this->restrictor_block)){
+            return;
+        }
+        $restricted_blocks = $this->restrictor_block['innerBlocks'];
+        foreach ($restricted_blocks as $restricted_block) {
+            $this->restricted_content = $this->restricted_content . serialize_block($restricted_block);
+        }
     }
 
     private function parse_blocks(){
@@ -61,6 +92,10 @@ class ExsultateSongSaveFormatter
 
         if(is_null($this->song_block))
             throw new ErrorException('Song post does not contain song block!');
+
+        $myfile = fopen(plugin_dir_path( __FILE__ ) . "reserialized.txt", "w");
+        fwrite($myfile, serialize_block($this->song_block));
+        fclose($myfile);
     }
 
     private function unquote_content(){
