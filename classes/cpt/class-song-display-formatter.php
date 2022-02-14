@@ -50,10 +50,6 @@ END;
 
         }
 
-        /*$myfile = fopen(plugin_dir_path( __FILE__ ) . "just_before_editing.txt", "w");
-        fwrite($myfile, $this->build_content());
-        fclose($myfile);*/
-
         return $raw_content;
     }
 

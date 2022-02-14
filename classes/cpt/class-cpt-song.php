@@ -65,9 +65,6 @@ END;
     }
 
     public function insert_song_data($data, $postarr){
-        $myfile = fopen(plugin_dir_path( __FILE__ ) . "data.txt", "w");
-        fwrite($myfile, $data['post_content']);
-        fclose($myfile);
 
         $formatter = new ExsultateSongSaveFormatter();
         return $formatter->format( $data );
