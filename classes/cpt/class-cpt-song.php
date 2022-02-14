@@ -26,14 +26,23 @@ END;
         add_filter( 'wp_insert_post_data', array($this, 'insert_song_data'), 10, 2 );
         add_filter( 'default_content', array($this, 'default_content_callback'), 10, 2 );
 
-        add_action( 'the_post', array($this, 'filter_song_data_for_edition'), 10 );
+        add_action( 'the_post', array($this, 'filter_song_data_for_edition'), 500 );
         add_filter( 'the_content', array($this, 'display_song_content_filter'), 5 );
     }
 
     public function display_song_content_filter( $content ){
         global $post;
+
+        //that line prevents from formatting
+        //the same post twice;
+        //this was an issue and I don't know WTF
+        if(isset($_GET['action']) && $_GET['action'] == 'edit') {
+            return $content;
+        }
+
         if ($post->post_type == 'songs') {
             $formatter = new ExsultateSongDisplayFormatter();
+
             return $formatter->format( $content, $post->post_id);
         }
         return $content;

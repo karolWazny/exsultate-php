@@ -32,18 +32,28 @@ END;
 END;
 
     public function format( &$raw_content, $post_id) {
-        $this->post_id = $post_id;
-        $this->content = $raw_content;
 
-        $this->extract_objects();
-        $this->build_song_block();
-        $this->build_restricted_block();
+        try{
+            $this->post_id = $post_id;
+            $this->content = $raw_content;
 
-        //it is super important we assign it here,
-        //not at any place before;
-        //so if any exception occurs, our data stays in its initial state
-        //so it is kind of safe
-        $raw_content = $this->build_content();
+            $this->extract_objects();
+            $this->build_song_block();
+            $this->build_restricted_block();
+
+            //it is super important we assign it here,
+            //not at any place before;
+            //so if any exception occurs, our data stays in its initial state
+            //so it is kind of safe
+            $raw_content = $this->build_content();
+        } catch (Exception $e) {
+
+        }
+
+        /*$myfile = fopen(plugin_dir_path( __FILE__ ) . "just_before_editing.txt", "w");
+        fwrite($myfile, $this->build_content());
+        fclose($myfile);*/
+
         return $raw_content;
     }
 
