@@ -9,6 +9,7 @@ class ExsultateSongDisplayFormatter
     private $restricted;
 
     private $song_block;
+    private $restricted_block;
 
     private static $_prefix = <<<END
 <!-- wp:columns -->
@@ -34,24 +35,49 @@ END;
         $this->post_id = $post_id;
         $this->content = $raw_content;
 
-        $this->do_magic();
-
-
+        $this->extract_objects();
+        $this->build_song_block();
+        $this->build_restricted_block();
 
         //it is super important we assign it here,
         //not at any place before;
         //so if any exception occurs, our data stays in its initial state
         //so it is kind of safe
-        $raw_content = self::$_prefix . serialize_block($this->song_block) . self::$_the_thing_in_between . self::$_suffix;
+        $raw_content = $this->build_content();
         return $raw_content;
     }
 
-    private function do_magic(){
+    private function build_content(){
+        return self::$_prefix . serialize_block($this->song_block) . self::$_the_thing_in_between
+            . serialize_block($this->restricted_block) . self::$_suffix;
+    }
+
+    private function build_restricted_block(){
+        $output = [
+            'blockName' => 'lazyblock/access-restriction',
+            'attrs'=> [
+
+            ],
+            'innerBlocks'=>$this->build_restricted_inner_blocks()
+        ];
+
+        $output['innerContent'] = array_fill(0, count($output['innerBlocks']), null);
+
+        $this->restricted_block = $output;
+    }
+
+    private function build_restricted_inner_blocks(){
+        $output = [];
+        foreach ($this->restricted as $restricted_block){
+            $output[] = parse_block($restricted_block);
+        }
+        return $output;
+    }
+
+    private function extract_objects(){
         $object = json_decode($this->content, true);
         $this->song = $object['song'];
         $this->restricted = $object['restricted'];
-
-        $this->build_song_block();
     }
 
     private function build_song_block(){
@@ -62,15 +88,10 @@ END;
                 'lyrics-author'=>$this->song['lyrics'],
                 'translation-author'=>$this->song['translated']
             ],
-            'innerBlocks'=>$this->build_song_inner_blocks(),
-            //todo get to know WTF is going on with these two:
-            'innerContent'=>["\n",null,"\n\n",null,"\n"],
-            'innerHTML'=>"\n\n\n\n"
+            'innerBlocks'=>$this->build_song_inner_blocks()
         ];
 
-        $myfile = fopen(plugin_dir_path( __FILE__ ) . "built_song.txt", "w");
-        fwrite($myfile,json_encode($output));
-        fclose($myfile);
+        $output['innerContent'] = array_fill(0, count($output['innerBlocks']), null);
 
         $this->song_block = $output;
     }
