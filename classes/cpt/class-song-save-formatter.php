@@ -40,7 +40,7 @@ class ExsultateSongSaveFormatter
             //not at any place before;
             //so if any exception occurs, our data stays in its initial state
             //so it is kind of safe
-            //$data['post_content'] = $this->post_content;
+            $data['post_content'] = $this->post_content;
         } catch (Exception $e) {
         }
 
