@@ -36,6 +36,10 @@ class ExsultateSongSaveFormatter
 
             $this->quote_content();
 
+            $myfile = fopen(plugin_dir_path(__FILE__) . 'debug_file.txt', 'w');
+            fwrite($myfile, $this->post_content);
+            fclose($myfile);
+
             //it is super important we assign it here,
             //not at any place before;
             //so if any exception occurs, our data stays in its initial state
