@@ -1,12 +1,14 @@
 <?php
 
 require_once 'class-obtain-song.php';
+require_once 'class-obtain-songbook.php';
 
 class ExsultateRest
 {
     private static $_instance = null; //phpcs:ignore
 
     private $song_json_endpoint = null;
+    private $songbook_json_endpoint;
 
     public static function instance( $file = '', $version = '1.0.0' ) {
         if ( is_null( self::$_instance ) ) {
@@ -17,6 +19,7 @@ class ExsultateRest
 
     public function __construct( $file = '', $version = '1.0.0' ){
         $this->song_json_endpoint = ExsultateRestObtainSong::instance();
+        $this->songbook_json_endpoint = ExsultateRestObtainSongbook::instance();
 
         $this->register_endpoints();
     }
