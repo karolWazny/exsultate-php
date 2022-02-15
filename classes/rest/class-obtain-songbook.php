@@ -35,15 +35,7 @@ class ExsultateRestObtainSongbook
             $song_ids[] = intval($single_id_string);
         }
 
-        $data = [];
-
-        foreach ($song_ids as $song_id){
-            $obtainer = ExsultateRestObtainSong::instance();
-            $song = $obtainer->obtain_song($song_id);
-            if(! is_null($song)){
-                $data[] = $song;
-            }
-        }
+        $data = $this->obtain_songs($song_ids);
 
         if(empty($data)){
             return new WP_Error( 'invalid_song_id', 'No songs with ids provided', array('status' => 404) );
@@ -54,5 +46,19 @@ class ExsultateRestObtainSongbook
         $response->set_status( 201 );
 
         return $response;
+    }
+
+    public function obtain_songs( $ids ){
+        $data = [];
+
+        foreach ($ids as $song_id){
+            $obtainer = ExsultateRestObtainSong::instance();
+            $song = $obtainer->obtain_song($song_id);
+            if(! is_null($song)){
+                $data[] = $song;
+            }
+        }
+
+        return $data;
     }
 }
