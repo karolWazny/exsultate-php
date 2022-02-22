@@ -1,13 +1,23 @@
-function add_to_flyer(){
+function set_song_ids(song_ids){
+    storage_object().setItem("flyer_items", JSON.stringify(song_ids));
+}
+
+function get_song_ids(){
     let flyer_items = JSON.parse(storage_object().getItem("flyer_items"));
     if(!flyer_items){
         flyer_items = [];
+        set_song_ids(flyer_items);
     }
+    return flyer_items;
+}
+
+function add_to_flyer(){
+    let flyer_items = get_song_ids();
     let song_id = get_post_id();
     let list_contains = flyer_items.includes(song_id);
     if(!list_contains){
         flyer_items.push(song_id);
-        storage_object().setItem("flyer_items", JSON.stringify(flyer_items));
+        set_song_ids(flyer_items);
     }
     console.log(flyer_items);
     //disable_add_to_cart_button();
@@ -19,17 +29,14 @@ function get_post_id(){
 }
 
 function clear_cart(){
-    storage_object().setItem("flyer_items", JSON.stringify([]));
+    set_song_ids([]);
     initialize_songs_list();
 }
 
 function initialize_songs_list(){
     let songs = document.getElementById("exsultate_songs_list");
     if(songs){
-        let song_ids = JSON.parse(storage_object().getItem("flyer_items"));
-        if(!song_ids){
-            song_ids = [];
-        }
+        let song_ids = get_song_ids();
         console.log(song_ids);
         call_ajax(song_ids);
     }
@@ -68,7 +75,7 @@ function song_list_item_from(song_item){
 }
 
 function remove_from_list(song_id){
-    let songs = JSON.parse(storage_object().getItem("flyer_items"));
+    let songs = get_song_ids();
     let index = 0;
     songs.forEach(song_item => {
         if(song_item['id'] === song_id){
@@ -76,7 +83,7 @@ function remove_from_list(song_id){
         }
     });
     songs = songs.splice(index, 1);
-    storage_object().setItem("flyer_items", JSON.stringify(songs));
+    set_song_ids(songs);
     initialize_songs_list();
 }
 
