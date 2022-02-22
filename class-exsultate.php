@@ -1,6 +1,7 @@
 <?php
 require_once 'classes/rest/class-exsultate-rest.php';
 require_once 'classes/cpt/class-cpt-song.php';
+require_once 'classes/frontend/class-songbook-ajax.php';
 class Exsultate
 {
     private static $_instance = null; //phpcs:ignore
@@ -37,6 +38,7 @@ class Exsultate
 
     private $rest;
     private $cpt;
+    private $ajax;
 
     /**
      * Constructor funtion.
@@ -47,11 +49,12 @@ class Exsultate
     public function __construct( $file = '', $version = '1.0.0' ) {
         $this->rest = ExsultateRest::instance();
         $this->cpt = ExsultateCustomPostTypeSong::instance();
+        $this->ajax = ExsultateSongbookAjax::instance();
         $this->_version = $version;
         $this->_token   = 'exsultate';
 
         // Load plugin environment variables.
-        $this->file       = $file;
+        $this->file       = plugin_dir_path(__FILE__) . 'class-exsultate.php';
         $this->dir        = dirname( $this->file );
         $this->assets_dir = trailingslashit( $this->dir ) . 'assets';
 
