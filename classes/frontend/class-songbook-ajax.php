@@ -40,7 +40,7 @@ class ExsultateSongbookAjax
     }
 
     public function shortcode_callback(){
-        $string = '<ul id="exsultate_songs_list">
+        $string = '<ul id="exsultate_songs_list" class="exsultate_songs_list">
 </ul>
 <div class="wp-block-buttons">
   <button id="clear-cart-butt" onclick="clear_cart()">

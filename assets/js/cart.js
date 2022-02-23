@@ -70,7 +70,7 @@ function list_item_from_song_data(song_data){
     list_element.appendChild(link);
     let button = document.createElement('button');
     button.setAttribute('onclick', 'remove_from_list('.concat(song_data['id']).concat(')'))
-    button.setAttribute('style', "'float:right;'");
+    button.setAttribute('style', "float:right;padding:5px 30px 4px;");
     button.innerText = 'Usuń';
     list_element.appendChild(button);
     return list_element;
