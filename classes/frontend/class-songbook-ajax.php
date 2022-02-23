@@ -28,6 +28,8 @@ class ExsultateSongbookAjax
         wp_enqueue_script( 'cart-related', exsultate()->assets_url . 'js/cart.js', array( 'jquery' ), null, true );
         wp_localize_script( 'cart-related', 'settings', array(
             'ajaxurl'    => admin_url( 'admin-ajax.php' ),
+            'resturl' => get_rest_url(),
+            'songbook_rest_path' => 'exsultate/v1/songbook/',
             'send_label' => __( 'Send report', 'reportabug'),
             'action' => 'get_songs_list_data')
         );
@@ -43,6 +45,9 @@ class ExsultateSongbookAjax
 <div class="wp-block-buttons">
   <button id="clear-cart-butt" onclick="clear_cart()">
     Wyczyść listę
+  </button>
+  <button id="generate-songbook-butt" onclick="generate_songbook()">
+    Generuj ulotkę
   </button>
 </div>';
         return $string;

@@ -93,6 +93,17 @@ function remove_from_list(song_id){
     initialize_songs_list();
 }
 
+function generate_songbook(){
+    let url = settings.resturl.concat(settings.songbook_rest_path);
+    let parameters = '';
+    let song_ids = get_song_ids();
+    song_ids.forEach(function(item){
+       parameters = parameters.concat(item).concat('+');
+    });
+    console.log(url.concat(parameters));
+    window.open(url.concat(parameters));
+}
+
 document.addEventListener("DOMContentLoaded", function(){
     initialize_songs_list();
 });
