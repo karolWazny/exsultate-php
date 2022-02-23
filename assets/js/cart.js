@@ -48,7 +48,6 @@ function call_ajax(song_ids){
         'song_ids': song_ids
     };
 
-    //jQuery('#exsultate_songs_list').post(settings.ajaxurl, data, function(response) {
     jQuery.post(settings.ajaxurl, data, function(response) {
 
         console.log(response.data);

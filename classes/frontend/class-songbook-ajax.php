@@ -50,8 +50,27 @@ class ExsultateSongbookAjax
 
     public function ajax_songs_list_callback(){
         $data = $_POST;
+        $song_ids_str = $data['song_ids'];
+        $song_ids = [];
+        foreach ($song_ids_str as $item) {
+            $song_ids[] = intval($item);
+        }
 
-        $response = $data['song_ids'];
+        $songs = get_posts(array(
+            'include' => $song_ids,
+            'post_type' => 'songs'
+        ));
+
+        $response = [];
+        foreach ($songs as $song_object) {
+            $relevant_data = [
+                'title' => $song_object->post_title,
+                'id' => $song_object->ID,
+                'url' => get_permalink($song_object->ID)
+            ];
+            $response[] = $relevant_data;
+        }
+
         wp_send_json_success($response);
     }
 }
