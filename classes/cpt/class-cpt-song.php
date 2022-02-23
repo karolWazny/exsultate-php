@@ -28,6 +28,69 @@ END;
 
         add_action( 'the_post', array($this, 'filter_song_data_for_edition'), 500 );
         add_filter( 'the_content', array($this, 'display_song_content_filter'), 5 );
+        add_filter( 'the_content', array($this, 'polish_notation_callback'), 999 );
+    }
+
+    private function twelve_keys(){
+        return [
+            'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'B', 'H'
+        ];
+    }
+
+    private function twelve_minor_keys(){
+        $keys = $this->twelve_keys();
+        $minor_keys = [];
+        foreach ($keys as $key) {
+            $minor_keys[] = $key . 'm';
+        }
+        return $minor_keys;
+    }
+
+    private function major_polish(){
+        return [
+            'C', 'Cis', 'D', 'Dis', 'E', 'F', 'Fis', 'G', 'Gis', 'A', 'B', 'H'
+        ];
+    }
+
+    private function minor_polish() {
+        $major = $this->major_polish();
+        $output = [];
+        foreach ($major as $item){
+            $output[] = strtolower($item);
+        }
+        return $output;
+    }
+
+    public function polish_notation_callback( $content ) {
+        $minor_chords_english = $this->twelve_minor_keys();
+        $minor_chords_polish = $this->minor_polish();
+
+        $searches = [];
+        foreach ($minor_chords_english as $item){
+            $searches[] = '<span class="chordshort">' . $item;
+        }
+
+        $replacements = [];
+        foreach ($minor_chords_polish as $item){
+            $replacements[] = '<span class="chordshort">' . $item;
+        }
+
+        $content = str_replace($searches, $replacements, $content);
+
+        $major_chords_english = $this->twelve_keys();
+        $major_chords_polish = $this->major_polish();
+
+        $searches = [];
+        foreach ($major_chords_english as $item){
+            $searches[] = '<span class="chordshort">' . $item;
+        }
+
+        $replacements = [];
+        foreach ($major_chords_polish as $item){
+            $replacements[] = '<span class="chordshort">' . $item;
+        }
+
+        return str_replace($searches, $replacements, $content);
     }
 
     public function display_song_content_filter( $content ){
