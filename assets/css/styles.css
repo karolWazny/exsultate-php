@@ -13,16 +13,16 @@ div.exsultate_chorus {
     float: right;
 }
 
-.utwory_lista ul {
+.exsultate_songs_list ul {
     list-style-type: none;
     margin-left: 10;
     padding: 0;
 }
 
-.utwory_lista p {
+.exsultate_songs_list p {
     display: none;
 }
 
-.utwory_lista h6 {
+.exsultate_songs_list h6 {
     margin: 0.5em 0 0.3em;
 }

@@ -32,13 +32,14 @@ END;
 END;
 
     public function format( &$raw_content, $post_id) {
-
         try{
             $this->post_id = $post_id;
             $this->content = $raw_content;
 
             $this->extract_objects();
+
             $this->build_song_block();
+
             $this->build_restricted_block();
 
             //it is super important we assign it here,
@@ -76,6 +77,9 @@ END;
         $object = json_decode($this->content, true);
         $this->song = $object['song'];
         $this->restricted = $object['restricted'];
+        if(is_null($this->restricted)){
+            $this->restricted = [];
+        }
     }
 
     private function build_song_block(){

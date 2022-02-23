@@ -1,19 +1,29 @@
 <?php
 
+require_once 'class-obtain-song.php';
+require_once 'class-obtain-songbook.php';
+require_once 'class-generate-formated-songbook.php';
 
 class ExsultateRest
 {
     private static $_instance = null; //phpcs:ignore
 
+    private $song_json_endpoint = null;
+    private $songbook_json_endpoint;
+    private $songbook_formatted_endpoint;
+
     public static function instance( $file = '', $version = '1.0.0' ) {
         if ( is_null( self::$_instance ) ) {
             self::$_instance = new self( $file, $version );
         }
-
         return self::$_instance;
     } // End instance ()
 
     public function __construct( $file = '', $version = '1.0.0' ){
+        $this->song_json_endpoint = ExsultateRestObtainSong::instance();
+        $this->songbook_json_endpoint = ExsultateRestObtainSongbook::instance();
+        $this->songbook_formatted_endpoint = ExsultateRestGenerateFormatedSongbook::instance();
+
         $this->register_endpoints();
     }
 
