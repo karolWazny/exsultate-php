@@ -19,7 +19,6 @@ function add_to_flyer(){
         flyer_items.push(song_id);
         set_song_ids(flyer_items);
     }
-    console.log(flyer_items);
     //disable_add_to_cart_button();
 }
 
@@ -37,7 +36,6 @@ function initialize_songs_list(){
     let songs = document.getElementById("exsultate_songs_list");
     if(songs){
         let song_ids = get_song_ids();
-        console.log(song_ids);
         call_ajax(song_ids);
     }
 }
@@ -49,28 +47,37 @@ function call_ajax(song_ids){
     };
 
     jQuery.post(settings.ajaxurl, data, function(response) {
-
-        console.log(response.data);
-        populate_list_with_data(response);
-
+        populate_list_with_data(response.data);
     });
 }
 
 function populate_list_with_data(songs_data){
+    let songs = document.getElementById("exsultate_songs_list");
+    if(songs){
+        songs_data.forEach(function(currentValue, index){
+            let list_element = list_item_from_song_data(currentValue);
+            songs.appendChild(list_element);
+        });
+    }
+}
 
+function list_item_from_song_data(song_data){
+    let list_element = document.createElement('li');
+    list_element.setAttribute('id', song_data['id']);
+    let link = document.createElement('a');
+    link.setAttribute('href', song_data['url']);
+    link.innerText = song_data['title'];
+    list_element.appendChild(link);
+    let button = document.createElement('button');
+    button.setAttribute('onclick', 'remove_from_list('.concat(song_data['id']).concat(')'))
+    button.setAttribute('style', "'float:right;'");
+    button.innerText = 'Usuń';
+    list_element.appendChild(button);
+    return list_element;
 }
 
 function storage_object(){
     return window.localStorage;
-}
-
-function song_list_item_from(song_item){
-    let output = "<li id='".concat(song_item['id']).concat("'><a href='").concat(song_item['url']);
-    output = output.concat("'>").concat(song_item['title']).concat("</a>");
-    let button_html = "<button onclick=remove_from_list('".concat(song_item['id']).concat("') style='float:right;'>");
-    button_html = button_html.concat("Usuń</button>");
-    output = output.concat(button_html).concat("</li>");
-    return output;
 }
 
 function remove_from_list(song_id){
