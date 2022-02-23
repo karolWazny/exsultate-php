@@ -62,6 +62,8 @@ END;
     }
 
     public function polish_notation_callback( $content ) {
+        $content = str_replace('Transpose up', 'Inna tonacja', $content);
+
         $minor_chords_english = $this->twelve_minor_keys();
         $minor_chords_polish = $this->minor_polish();
 

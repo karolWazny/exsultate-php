@@ -46,14 +46,20 @@ function call_ajax(song_ids){
         'song_ids': song_ids
     };
 
-    jQuery.post(settings.ajaxurl, data, function(response) {
-        populate_list_with_data(response.data);
-    });
+    if(song_ids.length > 0){
+        jQuery.post(settings.ajaxurl, data, function(response) {
+            populate_list_with_data(response.data);
+            console.log(response.data);
+        });
+    } else {
+        populate_list_with_data([]);
+    }
 }
 
 function populate_list_with_data(songs_data){
     let songs = document.getElementById("exsultate_songs_list");
     if(songs){
+        songs.innerHTML = '';
         songs_data.forEach(function(currentValue, index){
             let list_element = list_item_from_song_data(currentValue);
             songs.appendChild(list_element);
@@ -82,13 +88,9 @@ function storage_object(){
 
 function remove_from_list(song_id){
     let songs = get_song_ids();
-    let index = 0;
-    songs.forEach(song_item => {
-        if(song_item['id'] === song_id){
-            index = songs.indexOf(song_item);
-        }
+    songs = songs.filter(function(value){
+        return value !== song_id;
     });
-    songs = songs.splice(index, 1);
     set_song_ids(songs);
     initialize_songs_list();
 }

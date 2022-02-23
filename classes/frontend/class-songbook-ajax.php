@@ -61,21 +61,26 @@ class ExsultateSongbookAjax
             $song_ids[] = intval($item);
         }
 
-        $songs = get_posts(array(
-            'include' => $song_ids,
-            'post_type' => 'songs'
-        ));
+        if(!empty($song_ids)){
+            $songs = get_posts(array(
+                'include' => $song_ids,
+                'post_type' => 'songs'
+            ));
 
-        $response = [];
-        foreach ($songs as $song_object) {
-            $relevant_data = [
-                'title' => $song_object->post_title,
-                'id' => $song_object->ID,
-                'url' => get_permalink($song_object->ID)
-            ];
-            $response[] = $relevant_data;
+            $response = [];
+            foreach ($songs as $song_object) {
+                $relevant_data = [
+                    'title' => $song_object->post_title,
+                    'id' => $song_object->ID,
+                    'url' => get_permalink($song_object->ID)
+                ];
+                $response[] = $relevant_data;
+            }
+
+            wp_send_json_success($response);
+        } else {
+            wp_send_json_success([]);
         }
-
-        wp_send_json_success($response);
+        wp_send_json_error();
     }
 }
