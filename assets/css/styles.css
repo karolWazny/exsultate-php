@@ -26,3 +26,11 @@ div.exsultate_chorus {
 .exsultate_songs_list h6 {
     margin: 0.5em 0 0.3em;
 }
+
+li.wp-block-post.type-songs hr.wp-block-separator {
+    margin: 0 0 0;
+}
+
+li.wp-block-post.type-songs {
+    margin: auto auto auto;
+}

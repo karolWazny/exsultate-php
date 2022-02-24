@@ -113,7 +113,7 @@ class Exsultate
      * @since   1.0.0
      */
     public function enqueue_styles() {
-        wp_enqueue_style( 'styles',  esc_url( $this->assets_url ) . 'css/styles.css');
+        wp_enqueue_style( 'styles',  esc_url( $this->assets_url ) . 'css/styles.css', [], null);
     } // End enqueue_styles ()
 
     /**
