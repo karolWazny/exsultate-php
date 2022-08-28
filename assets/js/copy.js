@@ -3,7 +3,7 @@ function copyStringToClipboard (str) {
 
     if (clipboard !== undefined ){
         //this is the preferred way
-        navigator.clipboard.writeText('dupa');
+        navigator.clipboard.writeText(str);
         console.log('Copied: ' + str);
     } else {
         //but sometimes, e.g. when site source is considered unsafe,
